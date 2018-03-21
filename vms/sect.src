@@ -1,0 +1,19 @@
+;*******************************************************************
+; file name "sct.src"
+;*******************************************************************
+	.SECTION B,DATA,ALIGN=4
+	.SECTION R,DATA,ALIGN=4
+	.SECTION D,DATA,ALIGN=4
+; If other section are existed , Insert here Åg.SECTION XXXÅh,
+	.SECTION C,DATA,ALIGN=4
+__B_BGN: .DATA.L (STARTOF B)
+__B_END: .DATA.L (STARTOF B)+(SIZEOF B)
+__D_BGN: .DATA.L (STARTOF R)
+__D_END: .DATA.L (STARTOF R)+(SIZEOF R)
+__D_ROM: .DATA.L (STARTOF D)
+	.EXPORT __B_BGN
+	.EXPORT __B_END
+	.EXPORT __D_BGN
+	.EXPORT __D_END
+	.EXPORT __D_ROM
+	.END

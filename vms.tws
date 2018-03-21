@@ -1,0 +1,23 @@
+[HIMDBVersion]
+2.0
+[DATABASE_VERSION]
+"1.0" 
+[CURRENT_PROJECT]
+"vms" 
+[GENERAL_DATA]
+[BREAKPOINTS]
+[OPEN_WORKSPACE_FILES]
+"D:\hiro\My Documents\Workspace\vms\vms\vect.c" 
+"D:\hiro\My Documents\Workspace\vms\vms\vhandler.src" 
+"D:\hiro\My Documents\Workspace\vms\vms\reset.src" 
+"D:\hiro\My Documents\Workspace\vms\vms\vect.h" 
+"D:\hiro\My Documents\Workspace\vms\vms\iodefine.h" 
+"D:\hiro\My Documents\Workspace\vms\vms\initsct.c" 
+[WORKSPACE_FILE_STATES]
+"D:\hiro\My Documents\Workspace\vms\vms\iodefine.h" "110,145,704,306,0" 
+"D:\hiro\My Documents\Workspace\vms\vms\vhandler.src" "0,0,704,306,0" 
+"D:\hiro\My Documents\Workspace\vms\vms\vect.c" "-4,-30,822,485,1" 
+"D:\hiro\My Documents\Workspace\vms\vms\vect.h" "88,116,468,266,0" 
+"D:\hiro\My Documents\Workspace\vms\vms\initsct.c" "0,0,822,485,0" 
+"D:\hiro\My Documents\Workspace\vms\vms\reset.src" "0,0,468,266,0" 
+[END]

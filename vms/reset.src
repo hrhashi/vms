@@ -1,0 +1,178 @@
+;********************************************************************
+; FILE NAME "reset.src"		by H.Hashimoto
+;********************************************************************
+
+
+RBclr:		.equ	H'DFFFFFFF
+
+EXPEVT:		.equ	H'FFFFFFD4
+
+VMU_COREID:	.equ	H'A7000000
+
+	
+		.import	_vecttbl
+		.import	_isptbl
+
+		.import _term_notify
+		.import _term_idle
+		.import _term_sleep
+		.import _reset_master
+		.import _reset_slave
+
+		.export _reset
+	
+		.section	PV_RESET,code
+
+_reset:
+				mov.l	#VMU_COREID,r0
+				mov.l	@r0,r0
+			
+				cmp/eq	#0,r0
+				bf		RESET_SLAVE
+				nop
+RESET_MASTER:	
+				mov.l	#_term_sleep,r1
+				lds		r1,pr
+;				
+				stc.l	sr,r0
+				mov.l	#RBclr,r1
+				and		r1,r0
+				ldc.l	r0,ssr
+;
+				mov.l	#_reset_master,r0
+				ldc.l	r0,spc
+;
+				mov.l	#0,r7			;r7_bank = 0 (while RB = 0)
+				shll2	r7
+;
+				mov.l	#_isptbl,r0
+				mov.l	@(r0,r7),r15	;set stack pointer
+;	
+				rte
+				nop
+;
+				.pool
+
+;
+;
+RESET_SLAVE:
+				mov.l	#_term_sleep,r1
+				lds		r1,pr
+;				
+				stc.l	sr,r0
+				mov.l	#RBclr,r1
+				and		r1,r0
+				ldc.l	r0,ssr
+;
+				mov.l	#_reset_slave,r0
+				ldc.l	r0,spc
+;
+				cmp/eq	#1,r0
+				bt		SLAVE1
+				nop
+	
+				cmp/eq	#2,r0
+				bt		SLAVE2
+				nop
+	
+				cmp/eq	#4,r0
+				bt		SLAVE3
+				nop
+	
+				cmp/eq	#8,r0
+				bt		SLAVE4
+				nop
+	
+				cmp/eq	#16,r0
+				bt		SLAVE5
+				nop
+	
+				cmp/eq	#32,r0
+				bt		SLAVE6
+				nop
+	
+;				cmp/eq	#64,r0
+				bra		SLAVE7
+				nop
+;
+;
+SLAVE1:
+				mov.l	#1,r7			;r7_bank = 1 (while RB = 0)
+				shll2	r7
+;
+				mov.l	#_isptbl,r0
+				mov.l	@(r0,r7),r15	;set stack pointer	
+;				
+				rte
+				nop
+;
+;
+SLAVE2:
+				mov.l	#2,r7			;r7_bank = 2 (while RB = 0)
+				shll2	r7
+
+				mov.l	#_isptbl,r0
+				mov.l	@(r0,r7),r15	;set stack pointer	
+	
+				rte
+				nop
+;
+;
+SLAVE3:
+				mov.l	#3,r7			;r7_bank = 3 (while RB = 0)
+				shll2	r7
+
+				mov.l	#_isptbl,r0
+				mov.l	@(r0,r7),r15	;set stack pointer	
+	
+				rte
+				nop
+;
+;
+SLAVE4:
+				mov.l	#4,r7			;r7_bank = 4 (while RB = 0)
+				shll2	r7
+
+				mov.l	#_isptbl,r0
+				mov.l	@(r0,r7),r15	;set stack pointer	
+	
+				rte
+				nop
+;
+;
+SLAVE5:			
+				mov.l	#5,r7			;r7_bank = 5 (while RB = 0)
+				shll2	r7
+;
+				mov.l	#_isptbl,r0
+				mov.l	@(r0,r7),r15	;set stack pointer	
+;	
+				rte
+				nop
+;
+;
+SLAVE6:
+				mov.l	#6,r7			;r7_bank = 6 (while RB = 0)
+				shll2	r7
+
+				mov.l	#_isptbl,r0
+				mov.l	@(r0,r7),r15	;set stack pointer	
+	
+				rte
+				nop
+;
+;
+SLAVE7:
+				mov.l	#7,r7			;r7_bank = 7 (while RB = 0)
+				shll2	r7
+
+				mov.l	#_isptbl,r0
+				mov.l	@(r0,r7),r15	;set stack pointer	
+	
+				rte
+				nop
+;
+;
+				.pool
+				.end
+;
